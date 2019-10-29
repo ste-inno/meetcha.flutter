@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flip_card/flip_card.dart';
 
 void main() => runApp(MyApp());
 
@@ -24,30 +25,31 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class SecondRoute extends StatefulWidget {
-  SecondRoute({Key key}) : super(key: key);
-
+class CardRoute extends StatefulWidget {
   @override
-  _SecondRouteState createState() => _SecondRouteState();
+  _CardRouteState createState() => _CardRouteState();
 }
 
-class _SecondRouteState extends State<SecondRoute> {
+class _CardRouteState extends State<CardRoute> {
+  GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
+  // bool _visible = false;
+  // Widget child;
+
+  // void toggleVisible() {
+  //   setState(() {
+  //    _visible = !_visible;
+     
+  //   });
+
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text("Home", textAlign: TextAlign.center, style: TextStyle(color: Colors.black),),
-        backgroundColor: Colors.white,
-        leading: new IconButton(icon: new Icon(Icons.menu, color: Colors.black), onPressed: () {
-          Navigator.pop(context);
-        },),
-        actions: <Widget>[ new IconButton(icon: new Icon(Icons.favorite_border, color: Colors.black),) ],
-      ),
-      body: 
-        PageView.builder(
-          itemBuilder: (context, position) {
-            return FractionallySizedBox(widthFactor: 0.8, heightFactor: 0.8, child: Container(
+    return FlipCard(
+      key: cardKey,
+      flipOnTouch: false,
+      direction: FlipDirection.HORIZONTAL,
+      front: FractionallySizedBox(widthFactor: 0.8, heightFactor: 0.8, child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
@@ -84,19 +86,19 @@ class _SecondRouteState extends State<SecondRoute> {
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(20)
-                    ), child: Icon(Icons.fast_rewind, color: Colors.white,) ),),
+                    ), child: Icon(Icons.fast_rewind, color: Colors.white,), onPressed: () {}, ),),
                     SizedBox(width: 8,),
                     SizedBox(height: 50, width: 80 , child: RaisedButton( 
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(20)
-                    ), child: Icon(Icons.play_arrow, color: Colors.white,) ),),
+                    ), child: Icon(Icons.play_arrow, color: Colors.white,), onPressed: () {}, ),),
                     SizedBox(width: 8,),
                     SizedBox(height: 50, width: 80 , child: RaisedButton( 
                       color: Colors.white,
                       shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(20)
-                    ), child: Icon(Icons.fast_forward, color: Colors.white,) ),),
+                    ), child: Icon(Icons.fast_forward, color: Colors.white,), onPressed: () {}, ),),
                   ],
                   ),
                   SizedBox(height: 8,),
@@ -114,13 +116,93 @@ class _SecondRouteState extends State<SecondRoute> {
                       shape: CircleBorder(
                         side: BorderSide(width: 2, color: Color.fromARGB(255, 0, 173, 238), style: BorderStyle.solid)
                       ), 
-                      child: Icon(Icons.favorite, color: Colors.red, size: 50,) ),),
+                      child: Icon(Icons.favorite, color: Colors.red, size: 50,), onPressed: () => cardKey.currentState.toggleCard(), ),),
                       Text("Like", style: TextStyle(fontSize: 20, color: Colors.white, ),)
                   ],),
                   ),)
               ],),
               ),
-            );
+            ),
+            back: FractionallySizedBox(
+        widthFactor: 0.8, 
+        heightFactor: 0.8,
+        child: Container(
+          decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter, 
+                  colors: [ 
+                    Color.fromARGB(255, 0, 173, 238),
+                    Color.fromARGB(255, 38, 210, 238)
+                   ]), 
+                borderRadius: new BorderRadius.circular(12.0),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                Expanded(
+                child: FractionallySizedBox(widthFactor: 0.6, child: Center(child: 
+                  Text("This person has been added to your like list.", 
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white, fontSize: 22),),)),),
+                Expanded(
+                child: FractionallySizedBox(widthFactor: 0.6, child: Center(child: 
+                  Text("Start a conversation by recording a message for them", 
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: Colors.white, fontSize: 22), ),)),),
+                Expanded(child: Center(
+                    child: Column(
+                    //mainAxisAlignment: MainAxisAlignment.center,
+                    //crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                    SizedBox(height: 80, width: 80 , child: RaisedButton( 
+                      color: Colors.white,
+                      shape: CircleBorder(
+                        side: BorderSide(width: 2, color: Color.fromARGB(255, 0, 173, 238), style: BorderStyle.solid)
+                      ), 
+                      child: Icon(Icons.mic, color: Colors.red, size: 50,), onPressed: () => cardKey.currentState.toggleCard(), ),),
+                      SizedBox(height: 8,),
+                      Text("Tap to Start Recording", style: TextStyle(fontSize: 20, color: Colors.white, ),)
+                  ],),
+                  ),)
+              ],),
+              
+        ),
+      ),
+    );
+  }
+}
+
+class SecondRoute extends StatefulWidget {
+  SecondRoute({Key key}) : super(key: key);
+
+  @override
+  _SecondRouteState createState() => _SecondRouteState();
+}
+
+class _SecondRouteState extends State<SecondRoute> {
+  bool _viewMessage = false;
+
+  void toggleVisible() {
+    _viewMessage = !_viewMessage;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("Home", textAlign: TextAlign.center, style: TextStyle(color: Colors.black),),
+        backgroundColor: Colors.white,
+        leading: new IconButton(icon: new Icon(Icons.menu, color: Colors.black), onPressed: () {
+          Navigator.pop(context);
+        },),
+        actions: <Widget>[ new IconButton(icon: new Icon(Icons.favorite_border, color: Colors.black), onPressed: () {},) ],
+      ),
+      body: 
+        PageView.builder(
+          itemBuilder: (context, position) {
+            return CardRoute();
           },
           scrollDirection: Axis.vertical,
         )
@@ -132,6 +214,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    //Widget child;
     return Scaffold(
       backgroundColor: Color.fromARGB(255, 252, 210, 4),
       body: Center(
