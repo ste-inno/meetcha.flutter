@@ -141,15 +141,15 @@ class _CardRouteState extends State<CardRoute> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                 Expanded(
-                child: FractionallySizedBox(widthFactor: 0.6, child: Center(child: 
+                child: FractionallySizedBox(widthFactor: 0.7, child: Center(child: 
                   Text("This person has been added to your like list.", 
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white, fontSize: 22),),)),),
+                  style: TextStyle(color: Colors.white, fontSize: 16),),)),),
                 Expanded(
-                child: FractionallySizedBox(widthFactor: 0.6, child: Center(child: 
+                child: FractionallySizedBox(widthFactor: 0.8, child: Center(child: 
                   Text("Start a conversation by recording a message for them", 
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: Colors.white, fontSize: 22), ),)),),
+                  style: TextStyle(color: Colors.white, fontSize: 16), ),)),),
                 Expanded(child: Center(
                     child: Column(
                     //mainAxisAlignment: MainAxisAlignment.center,
@@ -162,7 +162,7 @@ class _CardRouteState extends State<CardRoute> {
                       ), 
                       child: Icon(Icons.mic, color: Colors.red, size: 50,), onPressed: () => cardKey.currentState.toggleCard(), ),),
                       SizedBox(height: 8,),
-                      Text("Tap to Start Recording", style: TextStyle(fontSize: 20, color: Colors.white, ),)
+                      Text("Tap to Start Recording", style: TextStyle(fontSize: 16, color: Colors.white, ),)
                   ],),
                   ),)
               ],),
