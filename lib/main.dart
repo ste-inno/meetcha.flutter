@@ -216,7 +216,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     //Widget child;
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 252, 210, 4),
+      backgroundColor: Color.fromARGB(255, 0, 0, 84),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
         // in the middle of the parent.
@@ -227,41 +227,42 @@ class _MyHomePageState extends State<MyHomePage> {
             FractionallySizedBox(
               widthFactor: 0.6,
               child: Column(children: <Widget>[
-              Image.asset("assets/main_logo.png"),
+              Image.asset("assets/meetcha_yellow.png"),
               Image.asset("assets/main_img.png"),
             ],),
             ),
             Spacer(),
-            Column(children: <Widget>[
-              FractionallySizedBox(
-                widthFactor: 0.8,
-                child: TextField(decoration: InputDecoration(
+            Column(
+              children: <Widget>[
+                Container(margin: EdgeInsets.only(left: 16, right: 16) ,height: 50, color: Colors.white , child: Center( child: TextField(
+                  decoration: InputDecoration(
                   border: InputBorder.none,
                   filled: true,
                   fillColor: Colors.white,
                   hintText: '+1 Mobile Number'
                   ),
                 ),
-              ),
+                ),
+                ),
               SizedBox(height: 8,),
-              FractionallySizedBox(
-                widthFactor: 0.8,
-                child: TextField(
+              
+                Container(margin: EdgeInsets.only(left: 16, right: 16), height: 50, color: Colors.white , child: Center( child: TextField(
                   decoration: InputDecoration(
-                    border: InputBorder.none,
-                    filled: true,
-                    fillColor: Colors.white,
-                    hintText: 'Password'
+                  border: InputBorder.none,
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintText: 'Password'
                   ),
                 ),
-              ),
+                ),
+                ),
               SizedBox(height: 16,),
               FractionallySizedBox(
                 widthFactor: 0.8,
                 child: new SizedBox(
                   height: 50,
                   child: RaisedButton(
-                    color: Color.fromARGB(255, 38, 210, 238),
+                    color: Color.fromARGB(255, 252, 210, 4),
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(25.0),
                       side: BorderSide(color: Color.fromARGB(100, 104, 112, 137))
@@ -275,6 +276,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     textColor: Colors.white,
                     child: const Text("Log In", 
                       style: TextStyle(
+                        color: Colors.black,
                         fontSize: 18,
                         fontWeight: FontWeight.w400
                       ),
@@ -288,7 +290,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: new SizedBox(
                   height: 50,
                   child: RaisedButton(
-                    color: Colors.white,
+                    color: Colors.transparent,
                     shape: RoundedRectangleBorder(
                       borderRadius: new BorderRadius.circular(25.0),
                       side: BorderSide(color: Color.fromARGB(255, 38, 210, 238))
@@ -306,6 +308,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
               SizedBox(height: 12),
               Text("You must be 18 years old to use this app",
+              textAlign: TextAlign.center,
                 style: TextStyle(
                   color: Colors.white,
                 ),),
@@ -326,7 +329,7 @@ class _MyHomePageState extends State<MyHomePage> {
             
           ],
         ),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }
